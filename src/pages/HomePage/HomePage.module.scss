@@ -1,0 +1,25 @@
+.wrapper {
+  border: 2px dotted grey;
+}
+
+.content {
+  border: 1px solid orange;
+}
+
+.radio-fieldset {
+  display: flex;
+
+  label {
+    margin-left: 20px;
+  }
+}
+
+.input-fieldset {
+  label {
+    margin-right: 20px;
+  }
+
+  input {
+    width: 400px;
+  }
+}
