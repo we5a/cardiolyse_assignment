@@ -5,17 +5,21 @@ import { RadioButton } from 'primereact/radiobutton';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userAdded } from "../../features/userSlice";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [selectedMessage, setSelectedMessage] = useState<string>('welcome');
-  const [name, setName] = useState<string>('');
+  const user: any = useSelector<any>(state =>state.user);
+  const [selectedMessage, setSelectedMessage] = useState<string>(user.greeting);
+  const [name, setName] = useState<string>(user.name);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      console.log('Clean form')
-    }
-  });
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('Clean form')
+  //   }
+  // });
 
   const radioSwitched = (e: any): void => {
     setSelectedMessage(e.value);
@@ -27,6 +31,9 @@ const HomePage = () => {
 
   const handleSumbit = (e: any): void => {
     e.preventDefault();
+
+    dispatch(userAdded({name, greeting: selectedMessage}));
+    setName('');
     navigate('/profile');
   }
 
@@ -34,16 +41,16 @@ const HomePage = () => {
     <div className={styles['wrapper']}>
 
       <div className={styles['content']}>
-        <h2>{title}</h2>
+        <h2 className={styles['content__title']}>{title}</h2>
 
         <form onSubmit={handleSumbit}>
           <fieldset className={styles['radio-fieldset']}>
             <RadioButton
               inputId="greet1"
               name="greeting"
-              value="welcome"
+              value="Welcome"
               onChange={radioSwitched}
-              checked={selectedMessage == 'welcome'}
+              checked={selectedMessage === 'Welcome'}
             />
             <label htmlFor="greet1">Welcome</label>
           </fieldset>
@@ -52,9 +59,9 @@ const HomePage = () => {
             <RadioButton
               inputId="greet2"
               name="greeting"
-              value="thank-you"
+              value="Thank you"
               onChange={radioSwitched}
-              checked={selectedMessage == 'thank-you'}
+              checked={selectedMessage === 'Thank you'}
             />
             <label htmlFor="greet2">Thank You</label>
           </fieldset>

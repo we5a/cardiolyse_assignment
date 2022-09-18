@@ -1,13 +1,20 @@
 .wrapper {
   border: 2px dotted grey;
+  max-width: 800px;
+  margin: 20px auto;
 }
 
 .content {
   border: 1px solid orange;
+
+  &__title {
+    text-align: center;
+  }
 }
 
 .radio-fieldset {
   display: flex;
+  border: none;
 
   label {
     margin-left: 20px;
