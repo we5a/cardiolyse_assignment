@@ -1,32 +1,36 @@
+@use '../../styles/mixins';
+
 .wrapper {
-  border: 2px dotted grey;
-  max-width: 800px;
-  margin: 20px auto;
-}
+  @include mixins.page-wrapper;
 
-.content {
-  border: 1px solid orange;
-
-  &__title {
+  .title {
     text-align: center;
   }
-}
 
-.radio-fieldset {
-  display: flex;
-  border: none;
+  .radio-fieldset {
+    display: flex;
+    border: none;
 
-  label {
-    margin-left: 20px;
-  }
-}
-
-.input-fieldset {
-  label {
-    margin-right: 20px;
+    label {
+      margin-left: 20px;
+    }
   }
 
-  input {
-    width: 400px;
+  .input-fieldset {
+    margin-top: 10px;
+    border: none;
+
+    label {
+      margin-right: 20px;
+    }
+
+    input {
+      width: 400px;
+    }
+  }
+
+  .submit-button {
+    display: block;
+    margin: 40px auto 10px;
   }
 }

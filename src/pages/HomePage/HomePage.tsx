@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from './HomePage.module.scss';
 import { title } from '../../assets/properties';
 import { RadioButton } from 'primereact/radiobutton';
@@ -10,70 +10,61 @@ import { userAdded } from "../../features/userSlice";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const user: any = useSelector<any>(state =>state.user);
+  const user: any = useSelector<any>(state => state.user);
   const [selectedMessage, setSelectedMessage] = useState<string>(user.greeting);
   const [name, setName] = useState<string>(user.name);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('Clean form')
-  //   }
-  // });
 
   const radioSwitched = (e: any): void => {
     setSelectedMessage(e.value);
   }
 
-  const handleNameChange = (e: any): void => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setName(e.target.value);
   }
 
-  const handleSumbit = (e: any): void => {
+  const handleSumbit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    dispatch(userAdded({name, greeting: selectedMessage}));
+    dispatch(userAdded({ name, greeting: selectedMessage }));
     setName('');
     navigate('/profile');
   }
 
   return (
     <div className={styles['wrapper']}>
+      <h2 className={styles['title']}>{title}</h2>
 
-      <div className={styles['content']}>
-        <h2 className={styles['content__title']}>{title}</h2>
+      <form onSubmit={handleSumbit}>
+        <fieldset className={styles['radio-fieldset']}>
+          <RadioButton
+            inputId="greet1"
+            name="greeting"
+            value="Welcome"
+            onChange={radioSwitched}
+            checked={selectedMessage === 'Welcome'}
+          />
+          <label htmlFor="greet1">Welcome</label>
+        </fieldset>
 
-        <form onSubmit={handleSumbit}>
-          <fieldset className={styles['radio-fieldset']}>
-            <RadioButton
-              inputId="greet1"
-              name="greeting"
-              value="Welcome"
-              onChange={radioSwitched}
-              checked={selectedMessage === 'Welcome'}
-            />
-            <label htmlFor="greet1">Welcome</label>
-          </fieldset>
+        <fieldset className={styles['radio-fieldset']}>
+          <RadioButton
+            inputId="greet2"
+            name="greeting"
+            value="Thank you"
+            onChange={radioSwitched}
+            checked={selectedMessage === 'Thank you'}
+          />
+          <label htmlFor="greet2">Thank You</label>
+        </fieldset>
 
-          <fieldset className={styles['radio-fieldset']}>
-            <RadioButton
-              inputId="greet2"
-              name="greeting"
-              value="Thank you"
-              onChange={radioSwitched}
-              checked={selectedMessage === 'Thank you'}
-            />
-            <label htmlFor="greet2">Thank You</label>
-          </fieldset>
+        <fieldset className={styles['input-fieldset']}>
+          <label htmlFor="name">Name:</label>
+          <InputText id="name" value={name} onChange={handleNameChange} required />
+        </fieldset>
 
-          <fieldset className={styles['input-fieldset']}>
-            <label htmlFor="name">Name:</label>
-            <InputText id="name" value={name} onChange={handleNameChange} required />
-          </fieldset>
-
-          <Button label="Submit" type="submit" />
-        </form>
-      </div>
+        <Button className={styles['submit-button']} label="Submit" type="submit" />
+      </form>
     </div>
   )
 }

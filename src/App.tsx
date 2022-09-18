@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import styles from './App.module.scss';
+import React from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  useSearchParams,
 } from 'react-router-dom';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import store from './app/store';
 import ProfilePage from './pages/ProfilePage/ProfilePage';

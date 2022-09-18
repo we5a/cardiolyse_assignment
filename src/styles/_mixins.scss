@@ -1,0 +1,7 @@
+@mixin page-wrapper {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px dashed grey;
+}

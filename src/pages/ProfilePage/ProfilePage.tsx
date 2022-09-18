@@ -10,7 +10,6 @@ import { messageAdded } from '../../features/userActionsSlice';
 const ProfilePage = () => {
   const navigate = useNavigate();
   const user: any = useSelector<any>(state => state.user);
-  console.log('RECE', user);
   const dispatch = useDispatch();
 
   const handleBack = () => {
@@ -26,7 +25,7 @@ const ProfilePage = () => {
   return (
     <div className={styles['wrapper']}>
       <h2>{user.greeting} {user.name}!</h2>
-      <p>Logged in as {user.role}</p>
+      <p className={styles['role']}>Logged in as {user.role}</p>
 
       <fieldset className={styles['button-block']}>
         <Button onClick={handleBack}>Back</Button>

@@ -1,22 +1,5 @@
-// @keyframes fadeOut {
-//   0% {
-//     display: block;
-//     opacity: 1;
-//   }
-
-//   99% {
-//     display: block;
-//     opacity: 0;
-//   }
-
-//   100% {
-//     display: 0;
-//   }
-// }
-
 .message-bar {
-  border: 2px dotted black;
-  background-color: lightblue;
+  background-color: rgb(220, 237, 243);
   width: 250px;
   min-height: 50px;
   position: absolute;
@@ -24,16 +7,13 @@
   right: 10px;
   border-radius: 6px;
   text-align: center;
-
-  
+  color: #848482;
 
   &__title {
-    margin-top: 10px;
+    margin: 16px 0 8px;
   }
 
   &__text {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 }
-
-
